@@ -1,5 +1,8 @@
-﻿namespace InvoiceWebApi.Entities
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace InvoiceWebApi.Entities
 {
+    [Keyless]
     public class Invoice
     {
         public int InvoiceID { get; set; }

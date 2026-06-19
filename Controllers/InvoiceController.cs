@@ -8,11 +8,18 @@ namespace BuggyApp.Controllers
     [Route("api/[controller]")]
     public class InvoiceController : ControllerBase
     {
-        [HttpGet]
-        public IActionResult GetInvoice()
+        private readonly IInvoiceService _invoiceService;
+
+        public InvoiceController( IInvoiceService invoiceService)
         {
-            List<Item> items = null;
-            if (items.Count == 0) // NullReferenceException
+            _invoiceService = invoiceService;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetInvoice()
+        {
+            List<InvoiceItemDTO> items = await _invoiceService.GetInvoice();
+            if (items.Count > 0) // NullReferenceException
             {
                 return Ok(new { items });
             }
@@ -22,7 +29,7 @@ namespace BuggyApp.Controllers
         public class Item
         {
             public string name { get; set; }
-            public double price { get; set; }
+            public decimal price { get; set; }
         }
     }
 }

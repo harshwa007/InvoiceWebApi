@@ -1,7 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace InvoiceWebApi.Entities
 {
+    [Keyless]
     public class InvoiceItem
     {
         public int ItemID { get; set; }
